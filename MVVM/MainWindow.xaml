@@ -1,0 +1,32 @@
+﻿<Window x:Class="MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBox Grid.Row="0" x:Name="InputBox" Width="200" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" x:Name="OutputBox" Width="200" Text="{Binding Text, Mode=TwoWay}" />
+        <Button Grid.Row="2" x:Name="CommandButton" Command="{Binding ChangeTextCommand}" Width="200" Content="click me !"/>
+        
+        <ListBox Grid.Row="3" x:Name="NameListBox" ItemsSource="{Binding NameList}" SelectionChanged="NameListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" MouseDown="StackPanel_MouseDown" Background="Red" HorizontalAlignment="Stretch">
+                        <TextBox Text="{Binding Path=. ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button x:Name="test" Command="{Binding DataContext.SaveName, ElementName=NameListBox}" CommandParameter="{Binding ElementName=NameListBox}" 
+                                Width="200" Content="click me !" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ComboBox Grid.Row="4" x:Name="NameComboBox" ItemsSource="{Binding NameList}"/>
+    </Grid>
+</Window>
