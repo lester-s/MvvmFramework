@@ -8,6 +8,7 @@ namespace ViewModelBase
 {
     public class ViewModelBase:INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyOfPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
